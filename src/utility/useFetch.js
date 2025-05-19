@@ -21,7 +21,7 @@ const useFetch = (endpoint) => {
     };
 
     fetchData();
-  }, [endpoint]);
+  }, [endpoint, BASE_URL]);
 
   return { data, loading, error };
 };
