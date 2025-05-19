@@ -10,10 +10,11 @@ import {
   faCog,
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
+import UserIcon from "./UserIcon";
 
 const Sider = () => {
   return (
-    <div className="w-[6vw] h-screen bg-amber-200 flex flex-col">
+    <nav className="w-[6vw] h-screen bg-amber-200 flex flex-col">
       <div className="icons h-[85%] bg-indigo-400 flex flex-col items-center py-8 gap-13 ml-1 mt-1 rounded-r-4xl">
         <FontAwesomeIcon icon={faHome} className="text-3xl text-white" />
         <FontAwesomeIcon icon={faBuilding} className="text-3xl text-white" />
@@ -25,11 +26,8 @@ const Sider = () => {
         <FontAwesomeIcon icon={faCog} className="text-3xl text-white" />
         <FontAwesomeIcon icon={faUser} className="text-3xl text-white" />
       </div>
-      <div className="userIcon flex flex-col flex-grow justify-center items-center bg-green-300">
-        {/* import user icon component */}
-        <h1>hello</h1>
-      </div>
-    </div>
+      <UserIcon />
+    </nav>
   );
 };
 
