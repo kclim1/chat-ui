@@ -14,7 +14,7 @@ import UserIcon from "./UserIcon";
 
 const Sider = () => {
   return (
-    <nav className="w-[6vw] h-screen bg-amber-200 flex flex-col z-50">
+    <nav className="w-[6vw] h-screen  flex flex-col z-50">
       <div className="icons h-[85%] bg-indigo-400 flex flex-col items-center py-8 gap-13 ml-1 mt-1 rounded-r-4xl">
         <FontAwesomeIcon icon={faHome} className="text-3xl text-white" />
         <FontAwesomeIcon icon={faBuilding} className="text-3xl text-white" />
