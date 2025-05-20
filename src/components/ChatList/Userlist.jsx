@@ -10,7 +10,7 @@ const Userlist = () => {
     const fetchUserList = async () => {
       setIsLoading(true);
       try {
-        const response = await axios.get(import.meta.env.VITE_GET_USER_LIST);
+        const response = await axios.get(import.meta.env.VITE_GET_CHATLIST);
         setUserList(response.data);
       } catch (err) {
         setError(err.message);
@@ -25,6 +25,20 @@ const Userlist = () => {
 
   if (isLoading) return <div>Loading user list...</div>;
   if (error) return <div>Error: {error}</div>;
-  if (userList) console.log("this is userlist", userList);
+  if (userList) console.log("userlist is here", userList);
+  return (
+    <div className="flex flex-col gap-2 py-2">
+      {userList && userList.length > 0 ? (
+        userList.map((user) => (
+          <div key={user.id} className=" p-2 ">
+            {user.username}
+          </div>
+        ))
+      ) : (
+        <p className="text-gray-500">No users found.</p>
+      )}
+    </div>
+  );
 };
+
 export default Userlist;
