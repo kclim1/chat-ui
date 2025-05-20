@@ -29,7 +29,7 @@ const UserIcon = () => {
   if (error) return <div>Error: {error}</div>;
 
   return (
-    <div className="flex flex-col flex-grow justify-center items-center gap-2 bg-indigo-200">
+    <div className="flex flex-col flex-grow justify-center items-center gap-2 bg-slate-100">
       <img
         src={user?.profileImage || "https://i.pravatar.cc/150?u=default"}
         alt="User Profile"
