@@ -13,8 +13,7 @@ const Groups = () => {
       try {
         const response = await axios.get(import.meta.env.VITE_GET_GROUPS);
         setGroups(response.data);
-        console.log("length is", response.data.length);
-        console.log("Fetched groups:", response.data);
+        console.log("data", response.data);
       } catch (err) {
         setError(err.message);
         console.error("Error fetching groups:", err);
@@ -30,17 +29,31 @@ const Groups = () => {
   if (error) return <div>Error: {error}</div>;
 
   return (
-    <div className="bg-green-200 w-[350px] h-[250px] flex-grow flex flex-col">
-      <header className="flex justify-between p-4 bg-indigo-300">
-        <h3>Groups ({groups?.length})</h3>
-        <h3 className="cursor-pointer font-bold">+</h3>
+    <div className="bg-amber-100 w-[350px] h-[390px] mt-5 flex-grow flex flex-col ">
+      <header className="flex justify-between p-4 bg-indigo-300 rounded-lg">
+        <h3 className="text-xl">Groups ({groups?.length})</h3>
+        <h3 className="text-xl  font-bold">+</h3>
       </header>
 
-      <div className="groups flex flex-col gap-2 p-4 overflow-y-auto">
+      <div className="groups flex flex-col gap-2 overflow-y-auto rounded-lg">
         {groups && groups.length > 0 ? (
           groups.map((group) => (
-            <div key={group.id} className=" px-3 py-2 ">
-              {group.name}
+            <div
+              key={group.id}
+              className="px-3 py-2 flex items-center justify-between hover:bg-indigo-100 rounded-lg"
+            >
+              {/* Left side: initial + group name */}
+              <div className="flex items-center rounded-lg">
+                <span className="bg-indigo-200 w-8 h-8 inline-flex items-center justify-center mr-4 rounded text-sm font-bold">
+                  {group.name.charAt(0).toUpperCase()}
+                </span>
+                <span>{group.name}</span>
+              </div>
+
+              {/* Right side: user count */}
+              <span className="bg-indigo-200 text-sm px-2 py-1 rounded-full">
+                +{group.users.length}
+              </span>
             </div>
           ))
         ) : (
