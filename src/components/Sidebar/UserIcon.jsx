@@ -12,7 +12,6 @@ const UserIcon = () => {
       setLoading(true);
       try {
         const response = await axios.get(import.meta.env.VITE_GET_CURRENT_USER); //assume you are user #5
-        // console.log("Fetched User Data:", response.data);
         setUser(response.data);
       } catch (err) {
         setError(err.message);
