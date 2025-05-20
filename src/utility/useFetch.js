@@ -1,11 +1,11 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 
-const useFetch = (endpoint) => {
+const useFetch = (url, endpoint) => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const BASE_URL = import.meta.env.VITE_GET_USER_DETAILS;
+  const BASE_URL = url;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -21,7 +21,7 @@ const useFetch = (endpoint) => {
     };
 
     fetchData();
-  }, [endpoint, BASE_URL]);
+  }, [url, endpoint, BASE_URL]);
 
   return { data, loading, error };
 };
