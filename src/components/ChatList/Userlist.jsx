@@ -2,12 +2,14 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import useUserIdStore from "../../store/useUserIdStore";
 
 const Userlist = () => {
   const [userList, setUserList] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [searchValue, setSearchValue] = useState("");
+  const { setSelectedUserId } = useUserIdStore();
 
   useEffect(() => {
     const fetchUserList = async () => {
@@ -29,6 +31,10 @@ const Userlist = () => {
   const filteredUsers = userList.filter((user) =>
     user.username.toLowerCase().includes(searchValue.toLowerCase())
   );
+  const handleSelectId = (id) => {
+    console.log("id selected", id);
+    setSelectedUserId(id);
+  };
 
   if (isLoading) return <div>Loading user list...</div>;
   if (error) return <div>Error: {error}</div>;
@@ -51,7 +57,11 @@ const Userlist = () => {
       <div className="flex flex-col gap-2 py-2 min-h-[350px]">
         {filteredUsers && filteredUsers.length > 0 ? (
           filteredUsers.map((user) => (
-            <div key={user.id} className=" p-2 flex">
+            <div
+              onClick={() => handleSelectId(user.id)}
+              key={user.id}
+              className=" p-2 flex cursor-pointer hover:bg-slate-200 hover:rounded-lg"
+            >
               <img
                 src={user.profileImage}
                 className="w-10 h-10 rounded-full object-cover mr-3"
