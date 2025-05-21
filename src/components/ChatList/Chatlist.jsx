@@ -1,4 +1,3 @@
-import Searchbar from "./Searchbar";
 import Userlist from "./Userlist";
 
 const Chatlist = () => {
