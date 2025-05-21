@@ -32,13 +32,12 @@ const Userlist = () => {
     user.username.toLowerCase().includes(searchValue.toLowerCase())
   );
   const handleSelectId = (id) => {
-    console.log("id selected", id);
     setSelectedUserId(id);
   };
 
   if (isLoading) return <div>Loading user list...</div>;
   if (error) return <div>Error: {error}</div>;
-  if (userList) console.log("userlist is here", userList);
+
   return (
     <div className="container  max-h-[400px] overflow-y-auto flex flex-col">
       <div className="flex items-center bg-gray-100 text-gray-600 px-3 py-2 rounded-lg w-full">
@@ -68,8 +67,6 @@ const Userlist = () => {
               />
               <div>
                 <p>{user.username}</p>
-                <p>Last message</p>
-                <p>time stamp</p>
               </div>
             </div>
           ))
