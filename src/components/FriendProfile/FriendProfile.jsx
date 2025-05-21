@@ -7,12 +7,13 @@ import { faUserPlus } from "@fortawesome/free-solid-svg-icons";
 import { faCommentDots } from "@fortawesome/free-solid-svg-icons";
 import { faVideo } from "@fortawesome/free-solid-svg-icons";
 import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
+import { faUsers } from "@fortawesome/free-solid-svg-icons";
 
 const FriendProfile = () => {
   const [friend, setFriend] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
-  const { selectedUserId } = useUserIdStore();
+  const { selectedUserId, setFriendProfile } = useUserIdStore();
 
   useEffect(() => {
     const fetchFriend = async () => {
@@ -23,26 +24,24 @@ const FriendProfile = () => {
         const res = await axios.get(
           `${import.meta.env.VITE_GET_USER_BY_ID}${selectedUserId}`
         );
-        console.log("req sent");
+        setFriendProfile(res.data);
         setFriend(res.data);
-        console.log("response", res.data);
       } catch (err) {
         setError(err.message);
-        console.error("Failed to fetch friend profile:", err);
       } finally {
         setIsLoading(false);
       }
     };
 
     fetchFriend();
-  }, [selectedUserId]);
+  }, [selectedUserId, setFriendProfile]);
 
   if (error) return <p>{error}</p>;
   if (isLoading) return <p>Loading...</p>;
   return (
     <div className="profile-container flex flex-col items-center">
       <img className="w-full h-52 object-cover" src={friend?.profileImage} />
-      <div className="bg-amber-300 flex flex-col justify-center items-center w-[80%] rounded-lg gap-2 z-50 -mt-8">
+      <div className="bg-white flex flex-col justify-center items-center w-[80%] rounded-lg gap-2 z-50 -mt-8">
         <h2 className="text-xl font-bold">{friend?.username}</h2>
         <p className="text-sm text-gray-600">{friend?.position}</p>
         <span className="flex">
@@ -68,7 +67,7 @@ const FriendProfile = () => {
       </div>
       <hr className="m-4 w-full text-gray-400" />
       <div className="user-info flex flex-col w-full gap-4">
-        <div className="bg-green-200 w-full flex justify-between px-2">
+        <div className=" w-full flex justify-between px-2">
           <span className="text-2xl">User Information</span>
           <span className="text-2xl">
             <FontAwesomeIcon icon={faCircleInfo} />
@@ -81,14 +80,13 @@ const FriendProfile = () => {
       </div>
       <hr className="m-4 w-full text-gray-400" />
       <div className="w-full flex flex-col ">
-        <span className="flex justify-between bg-green-200 w-full px-2 my-3">
+        <span className="flex justify-between  w-full px-2 my-3">
           <span className="text-xl">Group Participants</span>
-          <span>Icon here</span>
+          <span>
+            <FontAwesomeIcon className="text-gray-500 text-xl" icon={faUsers} />
+          </span>
         </span>
-        <div className="group-participants bg-blue-300 flex  justify-between my-3 px-2">
-          <span className="text-xl">Fetch group here</span>
-          <span>Icon</span>
-        </div>
+        <div className="group-participants  flex  justify-between my-3 px-2"></div>
       </div>
       <hr className="text-gray-400 w-full my-3" />
       <div className="media-container flex w-full justify-between px-2 my-1">
