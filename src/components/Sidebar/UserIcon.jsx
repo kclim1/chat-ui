@@ -1,11 +1,12 @@
-// src/components/UserIcon.jsx
 import { useEffect, useState } from "react";
 import axios from "axios";
+import useCurrentUserStore from "../../store/useCurrentUserStore";
 
 const UserIcon = () => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const { setCurrentUserProfile } = useCurrentUserStore();
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -13,6 +14,7 @@ const UserIcon = () => {
       try {
         const response = await axios.get(import.meta.env.VITE_GET_CURRENT_USER); //assume you are user #5
         setUser(response.data);
+        setCurrentUserProfile(response.data);
       } catch (err) {
         setError(err.message);
         console.error("Error Fetching User:", err);
@@ -22,7 +24,7 @@ const UserIcon = () => {
     };
 
     fetchUser();
-  }, []);
+  }, [setCurrentUserProfile]);
 
   if (loading) return <div>Loading user...</div>;
   if (error) return <div>Error: {error}</div>;
