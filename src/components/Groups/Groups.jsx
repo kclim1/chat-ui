@@ -28,8 +28,8 @@ const Groups = () => {
   if (error) return <div>Error: {error}</div>;
 
   return (
-    <div className="bg-amber-100 w-[350px] h-[300px] mt-5  flex flex-col flex-grow ">
-      <header className="flex justify-between p-4 bg-indigo-300 rounded-lg">
+    <div className="bg-white w-[350px] h-[300px] mt-5  flex flex-col flex-grow ">
+      <header className="flex justify-between p-4  rounded-lg">
         <h3 className="text-xl">Groups ({groups?.length})</h3>
         <h3 className="text-xl  font-bold">+</h3>
       </header>
